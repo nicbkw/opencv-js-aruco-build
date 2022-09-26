@@ -36,4 +36,4 @@ jobs:
         run: python3 ./platforms/js/build_js.py ../build_js --cmake_option="-DOPENCV_EXTRA_MODULES_PATH=../opencv-contrib/modules"
         working-directory: ./opencv
         env:
-          EMSCRIPTEN: ../emsdk-main/upstream/emscripten
+          EMSCRIPTEN: $GITHUB_WORKSPACE/emsdk-cache/emsdk-main/upstream/emscripten
