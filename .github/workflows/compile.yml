@@ -30,3 +30,6 @@ jobs:
         uses: mymindstorm/setup-emsdk@v11
         with:
           actions-cache-folder: emsdk-cache
+      - name: Compile
+        run: python ./platforms/js/build_js.py build_js --cmake_option="-DOPENCV_EXTRA_MODULES_PATH=../opencv-contrib/modules"
+        working-directory: ./opencv
