@@ -1,0 +1,27 @@
+name: Compile
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout OpenCV
+        uses: actions/checkout@v3
+        with:
+          repository: opencv/opencv
+          path: opencv
+      - name: Checkout OpenCV Contrib
+        uses: actions/checkout@v3
+        with:
+          repository: opencv/opencv-contrib
+          path: opencv-contrib
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v11
+        with:
+          actions-cache-folder: emsdk-cache
