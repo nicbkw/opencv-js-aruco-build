@@ -19,7 +19,7 @@ jobs:
       - name: Checkout OpenCV Contrib
         uses: actions/checkout@v3
         with:
-          repository: opencv/opencv-contrib
+          repository: opencv/opencv_contrib
           path: opencv-contrib
       - name: Setup emsdk
         uses: mymindstorm/setup-emsdk@v11
