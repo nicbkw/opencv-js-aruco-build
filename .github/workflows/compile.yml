@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: opencv-js
-          path: ${{ github.workspace }}/build_js
+          path: ${{ github.workspace }}/build_js/bin
