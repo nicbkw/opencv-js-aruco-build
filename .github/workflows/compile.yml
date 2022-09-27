@@ -35,3 +35,8 @@ jobs:
         working-directory: ./opencv
         env:
           EMSCRIPTEN: ${{ github.workspace }}/emsdk-cache/emsdk-main/upstream/emscripten
+      - name: Store archives
+        uses: actions/upload-artifact@v2
+        with:
+          name: opencv-js
+          path: $GITHUB_WORKSPACE/build_js
