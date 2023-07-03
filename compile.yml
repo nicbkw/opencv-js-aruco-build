@@ -1,0 +1,43 @@
+name: Compile
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout OpenCV
+        uses: actions/checkout@v3
+        with:
+          repository: opencv/opencv
+          path: opencv
+      - name: Checkout OpenCV Contrib
+        uses: actions/checkout@v3
+        with:
+          repository: opencv/opencv_contrib
+          path: opencv-contrib
+      - name: Setup cache
+        uses: actions/cache@v2
+        with:
+          path: emsdk-cache
+          key: emsdk-cache
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v11
+        with:
+          actions-cache-folder: emsdk-cache
+      - name: Compile
+        run: python3 ./platforms/js/build_js.py $GITHUB_WORKSPACE/build_js --cmake_option="-DOPENCV_EXTRA_MODULES_PATH=$GITHUB_WORKSPACE/opencv-contrib/modules"
+        working-directory: ./opencv
+        env:
+          EMSCRIPTEN: ${{ github.workspace }}/emsdk-cache/emsdk-main/upstream/emscripten
+      - name: Store archives
+        uses: actions/upload-artifact@v2
+        with:
+          name: opencv-js
+          path: ${{ github.workspace }}/build_js/bin
+          
